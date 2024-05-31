@@ -4,8 +4,8 @@
   <div class="col-8">
       <mat-form-field class="mx-2" appearance="fill">
         <mat-label>Choose an option</mat-label>
-        <mat-select [(ngModel)]="mode" (ngModelChange)="changeChild($event)">
-          <mat-option value="monthly">{{"Monthly "}}</mat-option>
+        <mat-select [(ngModel)]="mode" (ngModelChange)="changeMode($event)">
+          <mat-option value="monthly">{{"Monthly"}}</mat-option>
           <mat-option value="weekly">{{"Weekly"}}</mat-option>
           <mat-option value="daily">{{"Daily"}}</mat-option>
         </mat-select>

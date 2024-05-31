@@ -1,16 +1,36 @@
-<mat-grid-list [cols]="8">
-  <mat-grid-tile [colspan]="1">
-    <h6>Time</h6>
-    <div class="time" *ngFor="let timeSlot of getDayTimeSlot() ">
-      <p class="cell">{{timeSlot.value | date: 'shortTime' }}</p>
-    </div>
-  </mat-grid-tile>
+<div class="p-3" cdkDropListGroup>
+  <mat-grid-list [cols]="8" [rowHeight]="'fit'">
+    <mat-grid-tile [colspan]="1">
+      <div class="cell-header">
+        <h4>Time</h4>
+        <h6>In Hours</h6>
+      </div>
+      <div class="calender-cell" *ngFor="let timeSlot of getDayTimeSlot() ">
+        <p class="p-0 m-0 time">{{timeSlot.value | date: 'shortTime' }}</p>
+      </div>
+    </mat-grid-tile>
 
-  <mat-grid-tile [colspan]="1">Sun</mat-grid-tile>
-  <mat-grid-tile [colspan]="1">Mon</mat-grid-tile>
-  <mat-grid-tile [colspan]="1">Tue</mat-grid-tile>
-  <mat-grid-tile [colspan]="1">Wed</mat-grid-tile>
-  <mat-grid-tile [colspan]="1">Thu</mat-grid-tile>
-  <mat-grid-tile [colspan]="1">Fri</mat-grid-tile>
-  <mat-grid-tile [colspan]="1">Sat</mat-grid-tile>
-</mat-grid-list>
+    <mat-grid-tile *ngFor="let dayCol of getWeekDays()" [colspan]="1" cdkDropList [cdkDropListData]="dayCol.toISOString()" (cdkDropListDropped)="dropAtDay($event, dayCol)">
+      <div class="cell-header">
+        <h4> {{dayCol | date: 'EE'}}</h4>
+        <h6>{{dayCol | date: 'dd MMM'}}</h6>
+      </div>
+      <div class="calender-cell d-flex justify-content-center" *ngFor="let timeSlot of getDayTimeSlot(dayCol) " (click)="openDialogToAddAppointment(dayCol)">
+        <div class="drag-area" >
+          <div *ngFor="let appointment of getAppointmentsByHour(timeSlot.value)" class="card p-2"
+            (click)="openEditModal(appointment)" cdkDrag>
+            <div class="example-handle" cdkDragHandle>
+              <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                <path d="M0 0h24v24H0z" fill="none"></path>
+              </svg>
+            </div>
+            <small class="font-size-xs">
+              {{ appointment.title }} at {{ appointment.startTime | date: 'shortTime' }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

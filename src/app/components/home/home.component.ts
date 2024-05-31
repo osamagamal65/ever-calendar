@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,15 +22,27 @@ import { Router, RouterOutlet } from '@angular/router';
   providers: [provideNativeDateAdapter()],
 
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   selectedDate = new Date();
   mode: 'monthly' | 'daily' | 'weekly' = 'monthly';
   constructor(private router: Router) {
 
   }
 
-  changeChild(event: 'monthly' | 'daily' | 'weekly') {
+  ngOnInit(): void {
+  const lastUrl = this.router.url.split('/').pop();
+    if (lastUrl != this.mode && this.isMode(lastUrl) ) {
+      this.changeMode(this.router.url as 'monthly' | 'daily' | 'weekly');
+    }
+  }
+
+  changeMode(event: 'monthly' | 'daily' | 'weekly') {
     this.mode = event;
     this.router.navigateByUrl('/home/' + this.mode);
   }
+
+  isMode(value: any): value is 'monthly' | 'daily' | 'weekly' {
+    return ['monthly', 'daily', 'weekly'].includes(value);
+  }
+
 }

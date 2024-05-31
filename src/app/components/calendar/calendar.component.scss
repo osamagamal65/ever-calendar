@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   .overlay {
     opacity: 1;
     width: 100%; // Assuming full width initially
@@ -23,7 +22,13 @@
   }
 }
 
+.day-card {
+  height: 250px;
+  width: 100%;
+  border: 1px solid #dfdfdf;
+
+}
+
 .drag-area{
-  height: 150px;
-  background: red;
+  height: 230px;
 }

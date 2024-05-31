@@ -17,13 +17,16 @@ export const routes: Routes = [
       {
         path: 'daily',
         loadComponent: () => import('./components/timeline-view/timeline-view.component').then((x) => x.TimelineViewComponent)
+      },  {
+        path: "**",
+        redirectTo: 'monthly', pathMatch: "full"
       }
     ]
   },
   {
-    path: '', redirectTo: 'home/monthly', pathMatch: "full"
+    path: '', redirectTo: 'home', pathMatch: "full"
   }, {
     path: "**",
-    redirectTo: 'home/monthly', pathMatch: "full"
+    redirectTo: 'home', pathMatch: "full"
   }
 ];

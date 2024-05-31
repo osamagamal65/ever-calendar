@@ -7,7 +7,9 @@ import {
   CdkDrag,
   CdkDragDrop,
   CdkDragPlaceholder,
+  CdkDragStart,
   CdkDropList,
+  DragDropModule,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { Appointment } from '../../interfaces/appointment.interface';
@@ -15,12 +17,13 @@ import { MatIcon } from "@angular/material/icon";
 import { MatRipple } from '@angular/material/core';
 import { AppointmentsService } from '../../core/services/appointments.service';
 import { generateTimeSlots } from '../../core/helpers/time-slots';
+import { EditAppointmentComponent } from '../edit-appointment/edit-appointment.component';
 @Component({
   standalone: true,
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
-  imports: [CommonModule, MatGridListModule, MatRipple, CdkDrag, CdkDropList, MatIcon],
+  imports: [CommonModule, MatGridListModule, MatRipple, CdkDrag, DragDropModule, CdkDropList, MatIcon],
 })
 export class CalendarComponent implements OnInit {
   @Input({ required: true })
@@ -43,9 +46,17 @@ export class CalendarComponent implements OnInit {
     }, 2000);
   }
 
-  openEditModal() {
+  openEditModal(appointment: Appointment) {
+    const dialogRef = this.dialog.open(EditAppointmentComponent, {
+      width: '250px',
+      data: { appointment  }
+    });
 
-  }
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.getAppointments();
+    });
+    }
+
 
   async getAppointments() {
     try {
@@ -81,8 +92,9 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  dragStarted(appointment: Appointment, event: any) {
-    console.log(appointment);
+  dragStarted(appointment: Appointment, event: CdkDragStart) {
+    console.log('Drag started', appointment);
+
     console.log(event);
   }
 
@@ -94,6 +106,8 @@ export class CalendarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('The dialog was closed');
+      this.getAppointments();
+
     });
   }
 
