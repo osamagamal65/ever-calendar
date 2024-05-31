@@ -1,0 +1,23 @@
+mat-grid-tile {
+  padding: 2px 4px;
+  height: calc(100vh - 150px);
+
+  ::ng-deep {
+    .mat-grid-tile-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+  }
+}
+
+mat-grid-list {
+  height: calc(100vh - 150px);
+  overflow: scroll;
+}
+
+.cell{
+  width: 80px;
+  height: 40px;
+}

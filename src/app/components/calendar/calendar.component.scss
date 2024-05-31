@@ -1,0 +1,29 @@
+.calendar-day {
+  border: 1px solid #dfdfdf;
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .overlay {
+    opacity: 1;
+    width: 100%; // Assuming full width initially
+    height: 100%; // Assuming full height initially
+    transition: opacity 0.5s, width 0.5s 0.5s, height 0.5s 0.5s; // Delay width and height transitions
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &.hidden {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      transition: opacity 0.5s, width 0.5s 0.5s, height 0.5s 0.5s; // Apply the same transitions when hiding
+      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+  }
+}
+
+.drag-area{
+  height: 150px;
+  background: red;
+}

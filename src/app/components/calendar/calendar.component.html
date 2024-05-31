@@ -1,0 +1,24 @@
+<mat-grid-list cols="7" rowHeight="200px" cdkDropListGroup>
+
+  <mat-grid-tile *ngFor="let day of daysOfTheMonth" [colspan]="1" [rowspan]="1">
+    <div class="d-flex flex-column">
+      <div class="overlay">
+        <div class="d-flex flex-column">
+          <h6 class="m-0 p-0"> {{ day | date: 'shortDate' }}</h6>
+          <div class="drag-area" cdkDropList [cdkDropListData]="getAppointmentsByDate(day)" (cdkDropListDropped)="dropAtDay($event, day)">
+            <div *ngFor="let appointment of getAppointmentsByDate(day)" class="card p-2" (click)="openEditModal()"
+              cdkDrag (cdkDragStarted)="dragStarted(appointment, $event)">
+              <small class="font-size-xs">
+                {{ appointment.title }} at {{ appointment.startTime | date: 'shortTime' }}
+              </small>
+            </div>
+          </div>
+          <button (click)="openDialogToAddAppointment(day)" class="btn btn-icon" aria-label="Add Appointment">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>

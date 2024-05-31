@@ -1,0 +1,16 @@
+<mat-grid-list [cols]="8">
+  <mat-grid-tile [colspan]="1">
+    <h6>Time</h6>
+    <div class="time" *ngFor="let timeSlot of getDayTimeSlot() ">
+      <p class="cell">{{timeSlot.value | date: 'shortTime' }}</p>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1">Sun</mat-grid-tile>
+  <mat-grid-tile [colspan]="1">Mon</mat-grid-tile>
+  <mat-grid-tile [colspan]="1">Tue</mat-grid-tile>
+  <mat-grid-tile [colspan]="1">Wed</mat-grid-tile>
+  <mat-grid-tile [colspan]="1">Thu</mat-grid-tile>
+  <mat-grid-tile [colspan]="1">Fri</mat-grid-tile>
+  <mat-grid-tile [colspan]="1">Sat</mat-grid-tile>
+</mat-grid-list>

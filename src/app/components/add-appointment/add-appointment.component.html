@@ -1,0 +1,45 @@
+<div class="p-3 m-1">
+  <form [formGroup]="appointmentForm">
+    <input type="hidden" formControlName="id"/>
+    <!-- Appointment Title -->
+    <mat-form-field appearance="fill">
+      <mat-label>Appointment Title</mat-label>
+      <input matInput placeholder="Enter title" formControlName="title">
+    </mat-form-field>
+
+    <!-- Appointment Time -->
+    <mat-form-field appearance="fill">
+      <mat-label>Appointment Time</mat-label>
+      <mat-select placeholder="Select time" formControlName="startTime">
+        <mat-option *ngFor="let timeSlot of startTimeSlots" [value]="timeSlot">{{ formatTimeSlot(timeSlot.value)}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Appointment Time</mat-label>
+      <mat-select placeholder="Select end time" formControlName="endTime">
+        <mat-option *ngFor="let timeSlot of availableEndTimeSlots" [value]="timeSlot">{{ formatTimeSlot(timeSlot.value)}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Enter description" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <!-- Appointment Repeat (Multi Select) -->
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Repeat</mat-label>
+      <mat-select multiple formControlName="control">
+        <mat-option value="daily">Daily</mat-option>
+        <mat-option value="weekly">Weekly</mat-option>
+        <mat-option value="monthly">Monthly</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+    <!-- Submit Button -->
+    <button type="button" mat-raised-button color="primary" (click)="saveAppointment()">Submit</button>
+  </form>
+
+</div>

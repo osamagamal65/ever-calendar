@@ -1,0 +1,25 @@
+<!-- Material select example -->
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+      <mat-form-field class="mx-2" appearance="fill">
+        <mat-label>Choose an option</mat-label>
+        <mat-select [(ngModel)]="mode" (ngModelChange)="changeChild($event)">
+          <mat-option value="monthly">{{"Monthly "}}</mat-option>
+          <mat-option value="weekly">{{"Weekly"}}</mat-option>
+          <mat-option value="daily">{{"Daily"}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width mx-2">
+        <mat-label>Choose a start time</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-2"></div>
+
+</div>
+
+<router-outlet></router-outlet>
